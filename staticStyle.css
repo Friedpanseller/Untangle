@@ -1,0 +1,37 @@
+.transition300 {
+    transition: all 0.3s;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.center {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.noselect {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+
+.select {
+  -webkit-user-select: all;  
+  -moz-user-select: all;    
+  -ms-user-select: all;      
+  user-select: all;
+}
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;    
+}

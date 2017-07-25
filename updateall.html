@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="circle.css" />
+        <style>
+            body {
+                margin: 0;
+                padding: 40px;
+                background-color: black;
+                color: white;
+            }
+            h1, h2 {
+                text-align: center;
+            }
+            #percent {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="update"><br />Updating</h1>
+        <h2 id="date">Courses as of</h2>
+        <div id="graph" class="c100 p0 dark green big center">
+            <span id="percent">0%</span>
+            <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+        </div>
+        <div id="results"></div>
+    </body>
+    <script>
+        $("#date").text("Courses as of " + Date());
+        $.ajax({
+            url : "updateall.php",
+            type: "POST",
+            success : function (data) {
+              $("#results").html(data)
+            }
+        });
+    </script>
+</html>

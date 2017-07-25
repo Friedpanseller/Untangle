@@ -1,0 +1,272 @@
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: 'Helvetica';
+    background: #cfdde8 url(images/background.jpeg)  no-repeat center top fixed;
+    color: white;
+    overflow-x : hidden;
+}
+
+.h2 {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.h3 {
+    font-size: 36px;
+}
+
+p {
+    font-size: 24px;
+}
+
+a {
+    font-size: 24px;
+    border: none;
+    color: crimson;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 3px solid crimson;
+}
+
+/* unvisited link */
+a:link {
+}
+
+/* visited link */
+a:visited {
+}
+
+/* mouse over link */
+a:hover {
+}
+
+/* clicks on link */
+a:focus {
+}
+
+/* selected link */
+a:active {
+}
+
+#header {
+    text-align: right;
+    margin-top: 5px;
+    width: calc(100vw - 10px);
+    height: auto;
+}
+
+#header .login {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#header .login:hover {
+    color: crimson;
+}
+
+#login {
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    padding: 20px;
+    margin-right: 10px;
+    top: 30px;
+    right: 0;
+    display: none;
+}
+
+#login table tr td {
+    color: black;
+}
+
+#login input {
+    outline: none;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 14px;
+    border: 0;
+    border-bottom: 1px solid grey;
+    width: 100%;
+}
+
+#login input:focus {
+    border-bottom: 1px solid #1e90ff;
+}
+
+.loginButton {
+    transition: all 0.3s;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    color: black;
+}
+
+.btnBlue:hover {
+    border: 2px solid #1e90ff;
+    color: #1e90ff;
+}
+
+.btnRed:hover {
+    border: 2px solid crimson;
+    color: crimson;
+}
+
+#search {
+    margin-top: calc(50vh - 180px);
+    font-size: 34px;
+    display: none;
+}
+
+#search #bar {
+    margin-top: -30px;
+    width: 600px;
+    height: 90px;
+    margin-left: calc(50vw - 300px);
+    line-height: 90px;
+    vertical-align: middle;
+    font-size: 56px;
+    padding-left: 20px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.2);
+}
+
+#home {
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    color: crimson;
+    font-family: 'Courgette', cursive;
+}
+
+#homeUnderline {
+    border: 0; 
+    height: 5px; 
+    margin-top: -15px;
+    margin-bottom: 60px;
+    width: 0em;
+    transition: all 0.3s;
+    background: -moz-linear-gradient(0deg, rgba(220,20,60,0) 0%, rgba(220,20,60,1) 15%, rgba(220,20,60,1) 85%, rgba(220,20,60,0) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(220,20,60,0)), color-stop(15%, rgba(220,20,60,1)), color-stop(85%, rgba(220,20,60,1)), color-stop(100%, rgba(220,20,60,0))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(0deg, rgba(220,20,60,0) 0%, rgba(220,20,60,1) 15%, rgba(220,20,60,1) 85%, rgba(220,20,60,0) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(0deg, rgba(220,20,60,0) 0%, rgba(220,20,60,1) 15%, rgba(220,20,60,1) 85%, rgba(220,20,60,0) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(0deg, rgba(220,20,60,0) 0%, rgba(220,20,60,1) 15%, rgba(220,20,60,1) 85%, rgba(220,20,60,0) 100%); /* ie10+ */
+    background: linear-gradient(90deg, rgba(220,20,60,0) 0%, rgba(220,20,60,1) 15%, rgba(220,20,60,1) 85%, rgba(220,20,60,0) 100%); /* w3c */
+}
+
+#content {
+    width: 80vw;
+    min-height: 80vh;
+    margin-top: calc(-30vh - 100px);
+    margin-left: 10vw;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 15px;
+    display: none;
+    color: black;
+}
+
+#content #buffer {
+    background-color: transparent;
+    height: 90px;
+    width: 100%;
+}
+
+#content #results {
+    font-size: 20px;
+}
+
+#content #results table {
+    color: black;
+    margin: 0;
+    border: 0;
+    padding-top: 40px;
+    font-size: 20px;
+    width: 80vw;
+}
+
+#content #results table .results {
+    height: 40px;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+#content #results table .results:hover {
+    background-color: #ffadb3;
+}
+
+#content #details {
+    padding: 30px;
+    display: none;
+    overflow: hidden;
+}
+
+#content #details table {
+    color: black;
+    text-align: center;
+}
+
+#content #details #leftDiv {
+    width: calc(60vw - 50px);
+    padding-right: 20px;
+    float: left;
+    /*border: 1px solid green;*/
+}
+
+#content #details #rightDiv {
+    width: calc(20vw - 30px);
+    float: right;
+    /*border: 1px solid black;*/
+}
+
+#content #details #course {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#content #details #course a {
+    color: dodgerblue;
+    font-size: 20px;
+}
+
+#content #details #course a:hover {
+    border-bottom: 2px solid dodgerblue;
+}
+
+#content #details #course, #content #details #review {
+    /*border: 1px solid blue;*/
+    width: 100%;
+}
+
+#content #details #review {
+    font-size: 18px;
+}
+
+#content #details #review hr {
+    height: 1px; 
+    border: none; 
+    background-color: cyan
+}
+
+#content #details #review td {
+    padding-left: 5px; padding-right: 5px;
+}
+
+#content #details #course .description {
+    font-size: 18px;
+}
+
+#content #details #rating {
+    margin-top: 20px;
+    /*border: 1px solid red;*/
+    width: 100%;
+    border-left: 1px solid black;
+}
