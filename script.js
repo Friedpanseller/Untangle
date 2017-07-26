@@ -110,12 +110,12 @@ function createAccountScreen() {
          <table>
             <tr>
                 <td>zID: </td>
-                <td><input type='text' name='zID' autocomplete="off" /></td>
+                <td><input id='zID' type='text' name='zID' autocomplete="off" /></td>
                 <td>@unsw.edu.au</td>
             </tr>
             <tr>
                 <td>Password: </td>
-                <td colspan='2'><input type='password' name='zPass' autocomplete="off" /></td>
+                <td colspan='2'><input id='zPass' type='password' name='zPass' autocomplete="off" /></td>
             </tr>
         </table>
         <br />
@@ -125,13 +125,26 @@ function createAccountScreen() {
 }
 
 function sentEmailScreen() {
+    alert(1);
+    $.ajax({
+        url : "sendMail.php",
+        type: "POST",
+        async: false,
+        data: {
+            zID: $("#zID").val(),
+            password: $("#zPass").val()
+        },
+        success : function (data) {
+             $("#errorsDiv").html(data);
+        }
+    });
     $("#login").html(
         `<center><b><span style='font-size: 20px;'>Email Sent</span></b></center>
         <br />
         Please check your email for the confirmation link then click the button below to login
         <br />
         <br />
-        Email haven't arrived after 10 minutes? Check your spam folder or <span id="resendEmail">Resend email</span>
+        Email haven't arrived after 10 minutes? Check your spam folder or <span id="resendEmail" onclick="resendEmail()">Resend Email</span>
         <br />
         <br />
         <br />
@@ -157,6 +170,10 @@ function loginScreen() {
         <button name="create" class="loginButton btnBlue floatLeft" onclick="createAccountScreen()">Create Account</button>
         <button name="login" class="loginButton btnRed floatRight">Log In</button>`
     );
+}
+
+function resendEmail() {
+    
 }
 
 function searchBarClick() {

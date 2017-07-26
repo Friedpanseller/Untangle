@@ -410,16 +410,17 @@
                         //var_dump($courseName);
                         $lecEnrolled = 0;
                         $lecCapacity = 0;
-                        $tutEnrolled = 0;
-                        $tutCapacity = 0;
                         foreach($courseDetails as $type => $details) {
                             if($type == "LEC") {
+                                $lecEnrolled = 0;
                                 foreach($details as $detail) {
                                     $lecEnrolled += explode("/", $detail["enrolled"])[0];
                                     $lecCapacity += explode(" ", explode("/", $detail["enrolled"])[1])[0];
                                 }
                                // echo "Lec: " . $lecEnrolled . "/" . $lecCapacity . "<br />";
                             } else {
+                                $tutEnrolled = 0;
+                                $tutCapacity = 0;
                                 foreach($details as $detail) {
                                     $tutEnrolled += explode("/", $detail["enrolled"])[0];
                                     $tutCapacity += explode(" ", explode("/", $detail["enrolled"])[1])[0];

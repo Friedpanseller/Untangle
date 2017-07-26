@@ -26,7 +26,7 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
         
-        <title>UNSW Untangle</title>
+        <title>Untangle</title>
     </head>
     <body>
         <div id="header" class="noselect">You are not logged in. <span class="login">Log in</span>.</div>
@@ -53,5 +53,6 @@
         <div id="creator" class="noselect" style="position: absolute; bottom: 0; left: 25vw; width: 50vw; color: rgba(255,255,255,0.3);">
             <center>The University of New South Wales | Created by Leo Liu z5080336 &Cfr; student &#8226; unsw &#8226; edu &#8226; au | Computer Science and Engineering</center>
         </div>
+        <div id="errorsDiv"></div>
     </body>
 </html>
