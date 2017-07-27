@@ -21,9 +21,9 @@
 
     if($result) {*/
     $zID = $_POST["zID"];
-    $email = $zID . "@student.unsw.edu.au";
+    $email = $zID . "@unsw.edu.au";
     //$email = "friedpanseller@gmail.com";
-    $password = openssl_digest($_POST["password"] . "tomatoCatus", 'sha512');
+    $password = openssl_digest("tomatoCatus" . $_POST["password"] . "tomatoCatus", 'sha512');
     $code = bin2hex(openssl_random_pseudo_bytes(25));
 
     $query = "
@@ -46,21 +46,21 @@
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'mail.friedpanseller.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'accounts@friedpanseller.com';                 // SMTP username
+        $mail->Username = 'donotreply@friedpanseller.com';                 // SMTP username
         $mail->Password = '0*0*Leon';                           // SMTP password
         $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 465;                                    // TCP port to connect to
 
-        $mail->setFrom('accounts@friedpanseller.com', 'Untangle Account');
+        $mail->setFrom('donotreply@friedpanseller.com', 'Untangle Account');
         $mail->addAddress($email, $zID);     // Add a recipient
-        $mail->addReplyTo('donotreply@friedpanseller.com', 'DoNotReply');
+        $mail->addReplyTo('donotreply@friedpanseller.com', 'Do Not Reply');
 
         $mail->isHTML(true);                                  // Set email format to HTML
         
-        $mail->AddEmbeddedImage('logo/logo0white.png', 'logo');
+        //$mail->AddEmbeddedImage('logo/logo0white.png', 'logo');
 
         $mail->Subject = 'Untangle Account Verification';
-        $verifylink = "https://untangle.friedpanseller.com/verify.php?code=' . $code . '&user=' . $zID . '";
+        $verifylink = "https://untangle.friedpanseller.com/verify.php?code=" . $code . "&user=" . $zID;
         $mail->Body    = '
             <html>
                 <head>
@@ -73,16 +73,15 @@
                         }
                         #content {
                             width: 80%;
-                            margin-top: 40px;
                             margin: 0 auto;
                             font-size: 18px;
                             font-family: "Helvetica";
                         }
                         #footer {
                             width: 100%;
-                            height: 80px;
+                            height: 100px;
                             background-color: crimson;
-                            margin-top: 80px;
+                            margin-top: 50px;
                         }
                         #title {
                             font-size: 30px;
@@ -91,9 +90,8 @@
                     </style>
                 </head>
                 <body>
-                    <center><div id="header"><img src="cid:logo" height="128" /></div></center>
+                    <center><div id="header"><img src="https://untangle.friedpanseller.com/logo/logo0white.png" height="128" /></div></center>
                     <div id="content">
-                        <br />
                         <br />
                         <br />
                         <center><span id="title">Welcome to Untangle!</span></center>
@@ -106,7 +104,7 @@
                         <br /><br />
                         <a href=' . $verifylink . '>Verify Email</a>
                         <br /><br />
-                        Link doesn\'t work? Copy paste this into your website\'s URL bar:
+                        Link does not work? Copy paste this into your URL bar:
                         <br />
                         ' . $verifylink . '
                     </div>
@@ -114,7 +112,16 @@
                 </body>
             </html>
         ';
-        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->AltBody = '
+            Welcome to Untangle!\n
+            Hi ' . $zID . '!\n\n
+            Thanks for creating an account with us. In order to confirm your identity, please copy the link to verify your email.
+            With an Untangle account, you will be able to write reviews for courses, upvote or downvote existing reviews, or give the courses suitable ratings.
+            \n\n
+            Copy paste this into your website\'s URL bar:
+            \n
+            ' . $verifylink
+        ;
 
         if(!$mail->send()) {
             echo 'Message could not be sent.';

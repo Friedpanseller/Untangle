@@ -119,13 +119,15 @@ function createAccountScreen() {
             </tr>
         </table>
         <br />
+        <span id="errorsDiv"></span>
+        <br />
         <button name='back' class='loginButton btnBlue floatLeft' onclick="loginScreen()">Back</button>
         <button name='register' class='loginButton btnRed floatRight' onclick="sentEmailScreen()">Create Account</button>`
     );
 }
 
 function sentEmailScreen() {
-    alert(1);
+    $("#errorsDiv").text("Creating account...");
     $.ajax({
         url : "sendMail.php",
         type: "POST",
@@ -135,21 +137,24 @@ function sentEmailScreen() {
             password: $("#zPass").val()
         },
         success : function (data) {
-             $("#errorsDiv").html(data);
+            if(data.split("|")[0] != E) {
+                $("#login").html(
+                    `<center><b><span style='font-size: 20px;'>Email Sent</span></b></center>
+                    <br />
+                    Please check your email for the confirmation link then click the button below to login
+                    <br />
+                    <br />
+                    Email haven't arrived after 10 minutes? Check your spam folder or <span id="resendEmail" onclick="resendEmail()">Resend Email</span>
+                    <br />
+                    <br />
+                    <br />
+                    <button class='loginButton btnRed floatRight' onclick="loginScreen()">Log In</button>`
+                );
+            } else {
+                $("#errorsDiv").html(data);
+            }
         }
     });
-    $("#login").html(
-        `<center><b><span style='font-size: 20px;'>Email Sent</span></b></center>
-        <br />
-        Please check your email for the confirmation link then click the button below to login
-        <br />
-        <br />
-        Email haven't arrived after 10 minutes? Check your spam folder or <span id="resendEmail" onclick="resendEmail()">Resend Email</span>
-        <br />
-        <br />
-        <br />
-        <button class='loginButton btnRed floatRight' onclick="loginScreen()">Log In</button>`
-    );
 }
 
 function loginScreen() {

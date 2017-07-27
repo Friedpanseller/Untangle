@@ -53,6 +53,5 @@
         <div id="creator" class="noselect" style="position: absolute; bottom: 0; left: 25vw; width: 50vw; color: rgba(255,255,255,0.3);">
             <center>The University of New South Wales | Created by Leo Liu z5080336 &Cfr; student &#8226; unsw &#8226; edu &#8226; au | Computer Science and Engineering</center>
         </div>
-        <div id="errorsDiv"></div>
     </body>
 </html>

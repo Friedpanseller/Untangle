@@ -1,0 +1,127 @@
+<h1>Untangle Security</h1>
+<p style="color: crimson">If you do see a security vulnerability, please send me an email or contact me so that I can fix the code. Thanks for being helpful and not destroying the website :)</p>
+<h2>PHP Course Search</h2>
+<p>
+    $servername = "127.0.0.1";<br />
+    $username = "";<br />
+    $password = "";<br />
+    $dbname = "disentangle";<br />
+<br />
+    // Create connection<br />
+    $link = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);<br />
+<br />
+    $search = "%".$_POST["courseName"]."%";<br />
+    $stmt = $link->prepare("SELECT * FROM courses WHERE ID LIKE ? OR Name LIKE ? ;");<br />
+    $stmt->bindParam(1,$search);<br />
+    $stmt->bindParam(2,$search);<br />
+                           <br />
+    if($stmt->execute()) {<br />
+        $rows = $stmt->fetchAll();<br />
+    .......<br />
+</p>
+<br />
+<h2>User Accounts</h2>
+<p>
+    $zID = $_POST["zID"];<br />
+    $email = $zID . "@unsw.edu.au";<br />
+    $password = openssl_digest("salt" . $_POST["password"] . "salt", 'sha512');<br />
+    $code = bin2hex(openssl_random_pseudo_bytes(25));<br />
+<br />
+    $query = "<br />
+        INSERT INTO `users` <br />
+        (`zID`, `email`, `password`, `code`) VALUES<br />
+        ('" . $zID . "', '" . $email . "', '" . $password . "', '" . $code . "');<br />
+    ";<br />
+</p>
+<br />
+<h2>Sending Emails</h2>
+<p>
+    require 'PHPMailerAutoload.php';<br />
+<br />
+    $mail = new PHPMailer;<br />
+<br />
+    $mail->isSMTP();                                      // Set mailer to use SMTP<br />
+    $mail->Host = 'mail.friedpanseller.com';  // Specify main and backup SMTP servers<br />
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication<br />
+    $mail->Username = '';                 // SMTP username<br />
+    $mail->Password = '';                           // SMTP password<br />
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted<br />
+    $mail->Port = 465;                                    // TCP port to connect to<br />
+<br />
+    $mail->setFrom('donotreply@friedpanseller.com', 'Untangle Account');<br />
+    $mail->addAddress($email, $zID);     // Add a recipient<br />
+    $mail->addReplyTo('donotreply@friedpanseller.com', 'Do Not Reply');<br />
+<br />
+    $mail->isHTML(true);                                  // Set email format to HTML<br />
+<br />
+    $mail->Subject = 'Untangle Account Verification';<br />
+    $verifylink = "https://untangle.friedpanseller.com/verify.php?code=" . $code . "&amp;user=" . $zID;<br />
+    $mail->Body    = '<br />
+        html<br />
+            head<br />
+                style<br />
+                    #header {<br />
+                        width: 100%;<br />
+                        padding-top: 10px;<br />
+                        padding-bottom: 10px;<br />
+                        background-color: crimson;<br />
+                    }<br />
+                    #content {<br />
+                        width: 80%;<br />
+                        margin: 0 auto;<br />
+                        font-size: 18px;<br />
+                        font-family: "Helvetica";<br />
+                    }<br />
+                    #footer {<br />
+                        width: 100%;<br />
+                        height: 100px;<br />
+                        background-color: crimson;<br />
+                        margin-top: 50px;<br />
+                    }<br />
+                    #title {<br />
+                        font-size: 30px;<br />
+                        font-weight: bold;<br />
+                    }<br />
+                /style<br />
+            /head<br />
+            body<br />
+                centerdiv id="header"img src="https://untangle.friedpanseller.com/logo/logo0white.png" height="128" //div/center<br />
+                div id="content"<br />
+                    br /<br />
+                    br /<br />
+                    centerspan id="title"Welcome to Untangle!/span/center<br />
+                    br /<br />
+                    Hi ' . $zID . '!<br />
+                    br /<br />
+                    br /<br />
+                    Thanks for creating an account with us. In order to confirm your identity, please click the link to verify your email.<br />
+                    With an Untangle account, you will be able to write reviews for courses, upvote or downvote existing reviews, or give the courses suitable ratings.<br />
+                    br /br /<br />
+                    a href=' . $verifylink . 'Verify Email/a<br />
+                    br /br /<br />
+                    Link does not work? Copy paste this into your URL bar:<br />
+                    br /<br />
+                    ' . $verifylink . '<br />
+                /div
+                div id="footer"/div<br />
+            /body<br />
+        /html<br />
+    ';<br />
+    $mail->AltBody = '<br />
+        Welcome to Untangle!\n<br />
+        Hi ' . $zID . '!\n\n<br />
+        Thanks for creating an account with us. In order to confirm your identity, please copy the link to verify your email.<br />
+        With an Untangle account, you will be able to write reviews for courses, upvote or downvote existing reviews, or give the courses suitable ratings.<br />
+        \n\n<br />
+        Copy paste this into your website\'s URL bar:<br />
+        \n<br />
+        ' . $verifylink<br />
+    ;<br />
+<br />
+    if(!$mail->send()) {<br />
+        echo 'Message could not be sent.';<br />
+        echo 'Mailer Error: ' . $mail->ErrorInfo;<br /><br />
+    } else {<br />
+        echo 'Message has been sent';<br />
+    }<br />
+</p>
