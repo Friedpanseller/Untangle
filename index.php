@@ -29,7 +29,7 @@
         <title>Untangle</title>
     </head>
     <body>
-        <div id="header" class="noselect">You are not logged in. <span class="login">Log in</span>.</div>
+        <div id="header" class="noselect">You are not logged in. <span class="login" onclick="showLoginScreen()">Log in</span>.</div>
         <div id="login"></div>
         <div id="search">
             <center>

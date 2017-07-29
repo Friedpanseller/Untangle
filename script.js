@@ -101,10 +101,6 @@ $(document).ready(function() {
         }
     });
     
-    $("#header span").click(function() {
-        $("#login").fadeIn(300);
-    })
-    
     $(document).mouseup(function(e)  {
         var container = $("#login");
 
@@ -115,9 +111,36 @@ $(document).ready(function() {
         }
     });
     
-    loginScreen();
+    setLoginScreen();
+    userReturns();
 });
 
+function userReturns() {
+    var session = getCookie("session");
+    if(session) {
+        loginUser(session);
+    }
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function showLoginScreen() {
+    $("#login").fadeIn(300);
+}
     
 function createAccountScreen() {
     $("#login").html(
@@ -173,7 +196,7 @@ function sentEmailScreen() {
     });
 }
 
-function loginScreen() {
+function setLoginScreen() {
     $("#login").html(
        `<center><b><span style="font-size: 20px;">Login into Untangle</span></b></center>
         <br />
@@ -196,12 +219,12 @@ function loginScreen() {
         </table>
         <br />
         <button name="create" class="loginButton btnBlue floatLeft" onclick="createAccountScreen()">Create Account</button>
-        <button name="login" class="loginButton btnRed floatRight" onclick="loginUser()">Log In</button>`
+        <button name="login" class="loginButton btnRed floatRight" onclick="loginUser('')">Log In</button>`
     );
 }
 
-function loginUser() {
-    //alert(0);
+function loginUser(session) {
+    //alert("attempting login");
     $.ajax({
         url : "login.php",
         type: "POST",
@@ -209,7 +232,8 @@ function loginUser() {
             username: $("#loginUsername").val(),
             password: $("#loginPassword").val(),
             keepMeLoggedIn: $("#keepMeLoggedIn").val(),
-            userBrowser: navigator.browser
+            userBrowser: navigator.browser,
+            sessionID: session
         },
         success : function (data) {
             //alert(1);
@@ -221,6 +245,7 @@ function loginUser() {
                 $("#login").html(
                     `<center><b><span style='font-size: 20px;'>Welcome Back ` + data[1] + `</span></b></center>`
                 );
+                setUserOnline(data[1]);
                 if(sessionID != "doNot") {
                     var expiryDate = new Date();
                     var cookieLifeDays = 14;
@@ -235,7 +260,11 @@ function loginUser() {
     });
 }
 
-function resendEmail() {
+function setUserOnline(zID) {
+    $("#header").html("You are logged in as " + zID + ". <span class='login' onclick='logoutUser()'>Log out</span>.</div>");
+}
+
+function sendEmail() {
     
 }
 
