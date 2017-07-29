@@ -160,7 +160,7 @@ function createAccountScreen() {
         <br />
         <span id="errorsDiv"></span>
         <br />
-        <button name='back' class='loginButton btnBlue floatLeft' onclick="loginScreen()">Back</button>
+        <button name='back' class='loginButton btnBlue floatLeft' onclick="setLoginScreen()">Back</button>
         <button name='register' class='loginButton btnRed floatRight' onclick="sentEmailScreen()">Create Account</button>`
     );
 }
@@ -187,7 +187,7 @@ function sentEmailScreen() {
                     <br />
                     <br />
                     <br />
-                    <button class='loginButton btnRed floatRight' onclick="loginScreen()">Log In</button>`
+                    <button class='loginButton btnRed floatRight' onclick="setLoginScreen()">Log In</button>`
                 );
             } else {
                 $("#errorsDiv").html(data);
