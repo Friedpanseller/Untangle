@@ -1,11 +1,11 @@
 <?php
     $servername = "localhost";
-    $username = "friedpan_admin";
-    $password = "0*0*Leon";
+    $DBusername = "friedpan_admin";
+    $DBpassword = "0*0*Leon";
     $dbname = "friedpan_disentangle";
 
     // Create connection
-    $link = mysqli_connect($servername, $username, $password, $dbname);
+    $link = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
     // Check connection
     if ($link === false) {
         die("Connection failed: " . mysqli_connect_error());
@@ -32,7 +32,7 @@
         ('" . $zID . "', '" . $email . "', '" . $password . "', '" . $code . "');
     ";
 
-    echo "Query is " . $query . "<br />";
+    //echo "E|Query is " . $query . "<br />, password is " . $_POST["password"] . "***";
 
     if(mysqli_query($link, $query)) {
         echo "Sending email to " . $email . "...<br />";
@@ -124,16 +124,13 @@
         ;
 
         if(!$mail->send()) {
-            echo 'Message could not be sent.';
+            echo 'E|Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
-            echo 'Message has been sent';
+            echo 'E|Message has been sent';
         }
     } else {
         echo "E|" . mysqli_error($link);
     }
-    /*} else {
-        echo "E|MySQL Error. There is already an account with that ID. Result = " . $result;
-    }*/
     mysqli_close($link);
 ?> 

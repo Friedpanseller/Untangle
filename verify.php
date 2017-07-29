@@ -16,8 +16,9 @@
             foreach($rows as $row) {
                 if($row["code"] == $_GET["code"]) {
                     echo "Account Verified!";
-                     $stmt = $link->prepare("UPDATE users SET verified=1 WHERE zID='" . $_GET["user"] . "';");
-                     $stmt->execute();
+                    $stmt = $link->prepare("UPDATE users SET verified=1 WHERE zID=?;");
+                    $stmt->bindParam(1,$search);
+                    $stmt->execute();
                 }
                 break;
             }

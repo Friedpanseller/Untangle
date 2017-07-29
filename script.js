@@ -3,6 +3,22 @@ var clickedItem = false;
 
 var xhr = null;
 
+//Set navigator.browser to display "BrowserName BrowserVersion"
+navigator.browser = (function(){
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+})();
 
 $(document).ready(function() { 
     instantJump = window.location.hash.replace("#", ""); 
@@ -137,7 +153,7 @@ function sentEmailScreen() {
             password: $("#zPass").val()
         },
         success : function (data) {
-            if(data.split("|")[0] != E) {
+            if(data.split("|")[0] != 'E') {
                 $("#login").html(
                     `<center><b><span style='font-size: 20px;'>Email Sent</span></b></center>
                     <br />
@@ -164,17 +180,59 @@ function loginScreen() {
         <table>
             <tr>
                 <td>zID: </td>
-                <td><input type="text" name="username" /></td>
+                <td><input id="loginUsername" type="text" name="username" /></td>
             </tr>
             <tr>
                 <td>Password: </td>
-                <td><input type="password" name="password" /></td>
+                <td><input id="loginPassword" type="password" name="password" /></td>
+            </tr>
+            <tr>
+                <td>Keep me logged in </td>
+                <td><input id="keepMeLoggedIn" type="checkbox" style="width: 20px" name="keepLogged" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span id="loginErrors"></span></td>
             </tr>
         </table>
         <br />
         <button name="create" class="loginButton btnBlue floatLeft" onclick="createAccountScreen()">Create Account</button>
-        <button name="login" class="loginButton btnRed floatRight">Log In</button>`
+        <button name="login" class="loginButton btnRed floatRight" onclick="loginUser()">Log In</button>`
     );
+}
+
+function loginUser() {
+    //alert(0);
+    $.ajax({
+        url : "login.php",
+        type: "POST",
+        data: {
+            username: $("#loginUsername").val(),
+            password: $("#loginPassword").val(),
+            keepMeLoggedIn: $("#keepMeLoggedIn").val(),
+            userBrowser: navigator.browser
+        },
+        success : function (data) {
+            //alert(1);
+            data = data.split("|");
+            if(data[0] != 'E') {
+                //alert(2);
+                var username = data[1];
+                var sessionID = data[2];
+                $("#login").html(
+                    `<center><b><span style='font-size: 20px;'>Welcome Back ` + data[1] + `</span></b></center>`
+                );
+                if(sessionID != "doNot") {
+                    var expiryDate = new Date();
+                    var cookieLifeDays = 14;
+                    expiryDate.setTime(expiryDate.getTime() + (cookieLifeDays*24*60*60*1000));
+                    document.cookie = "session=" + sessionID + ";expires=" + expiryDate.toUTCString();
+                }
+            } else {
+                //alert(4);
+                $("#loginErrors").html(data[1]);
+            }
+        }
+    });
 }
 
 function resendEmail() {

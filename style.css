@@ -117,6 +117,10 @@ a:active {
     color: crimson;
 }
 
+#loginErrors {
+    color: red;
+}
+
 #resendEmail {
     color: #1e90ff;
     transition: all 0.3s;

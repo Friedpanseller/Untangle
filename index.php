@@ -31,8 +31,6 @@
     <body>
         <div id="header" class="noselect">You are not logged in. <span class="login">Log in</span>.</div>
         <div id="login"></div>
-        <!--<button id="magicButton">magicButton</button>
-        <button id="magicButton2">magicButton2</button>-->
         <div id="search">
             <center>
                 <span id="home" class="noselect">
