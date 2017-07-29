@@ -260,8 +260,38 @@ function loginUser(session) {
     });
 }
 
+function logoutUser() {
+    $.ajax({
+        url : "logout.php",
+        type: "POST",
+        data: {
+            userBrowser: navigator.browser,
+            sessionID: getCookie("session")
+        },
+        success : function (data) {
+            data = data.split("|");
+            if(data[0] != 'E') {
+                $("#login").html(
+                    `<center><b><span style='font-size: 20px;'>You are now logged out</span></b></center><br /><br />
+                    <button name="login" class="loginButton btnRed floatRight" onclick="setLoginScreen()">Log In</button>
+                    `
+                );
+                showLoginScreen();
+                setUserOffline();
+            } else {
+                alert("Error please contact administrator");
+            }
+        }
+    });
+}
+
 function setUserOnline(zID) {
     $("#header").html("You are logged in as " + zID + ". <span class='login' onclick='logoutUser()'>Log out</span>.</div>");
+}
+
+function setUserOffline() {
+    $("#header").html("You are not logged in. <span class='login' onclick='showLoginScreen()'>Log in</span>.");
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 function sendEmail() {
