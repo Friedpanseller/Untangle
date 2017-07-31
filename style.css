@@ -55,7 +55,7 @@ a:active {
 #header {
     text-align: right;
     margin-top: 5px;
-    width: calc(100vw - 10px);
+    width: calc(100vw - 20px);
     height: auto;
 }
 

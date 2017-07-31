@@ -5,6 +5,7 @@
         <script src="script.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css" />
         <link rel="stylesheet" type="text/css" href="circle.css" />
         <link rel="stylesheet" type="text/css" href="staticStyle.css" />
         <link rel="stylesheet" type="text/css" href="mediaScreens.css" />
