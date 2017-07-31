@@ -1,8 +1,7 @@
 <?php
-    $DBservername = "localhost";
-    $DBusername = "friedpan_admin";
-    $DBpassword = "0*0*Leon";
-    $DBname = "friedpan_disentangle";
+    require 'sqlDetails.php';
+
+    $sql = new sqlDetails;
 
     $userIP = $_SERVER['REMOTE_ADDR'];
     $userBrowser = $_POST['userBrowser'];
@@ -21,7 +20,7 @@
         $sessionID = bin2hex(openssl_random_pseudo_bytes(20));
         $hash = openssl_digest("ASaltyBlueberryBagel" . $userBrowser . $sessionID . $userIP . "ASaltyBlueberryBagel", 'sha512');
 
-        $link = new PDO("mysql:host=$DBservername;dbname=$DBname", $DBusername, $DBpassword);
+        $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
         $stmt = $link->prepare("SELECT password, verified FROM users WHERE zID = ?;");
         $stmt->bindParam(1,$username);
 
@@ -60,7 +59,7 @@
     } else {
         $hash = openssl_digest("ASaltyBlueberryBagel" . $userBrowser . $sessionID . $userIP . "ASaltyBlueberryBagel", 'sha512');
         
-        $link = new PDO("mysql:host=$DBservername;dbname=$DBname", $DBusername, $DBpassword);
+        $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
         $stmt = $link->prepare("SELECT zID FROM users WHERE session = ?;");
         $stmt->bindParam(1,$hash);
 

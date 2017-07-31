@@ -1,8 +1,7 @@
 <?php
-    $DBservername = "localhost";
-    $DBusername = "friedpan_admin";
-    $DBpassword = "0*0*Leon";
-    $DBname = "friedpan_disentangle";
+    require 'sqlDetails.php';
+
+    $sql = new sqlDetails;
 
     $userIP = $_SERVER['REMOTE_ADDR'];
     $userBrowser = $_POST["userBrowser"];
@@ -10,7 +9,8 @@
     $sessionID = $_POST['sessionID'];
     $sessionID = openssl_digest("ASaltyBlueberryBagel" . $userBrowser . $sessionID . $userIP . "ASaltyBlueberryBagel", 'sha512');
 
-    $link = new PDO("mysql:host=$DBservername;dbname=$DBname", $DBusername, $DBpassword);
+    // Create connection
+    $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
     $stmt = $link->prepare("UPDATE users SET session = NULL WHERE session=?;");
     $stmt->bindParam(1,$sessionID);
 
