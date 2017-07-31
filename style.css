@@ -138,7 +138,6 @@ a:active {
 #search {
     margin-top: calc(50vh - 180px);
     font-size: 34px;
-    display: none;
 }
 
 #search #bar {
@@ -155,6 +154,7 @@ a:active {
     border: none;
     background-color: rgba(255, 255, 255, 0.6);
     color: rgba(0, 0, 0, 0.2);
+    display: none;
 }
 
 #home {
@@ -163,6 +163,7 @@ a:active {
     font-weight: bold;
     color: crimson;
     font-family: 'Courgette', cursive;
+    display: none;
 }
 
 #homeUnderline {

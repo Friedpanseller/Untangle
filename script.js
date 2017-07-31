@@ -111,7 +111,11 @@ window.onload = function() {
         }
     });
     
-    $("#search").fadeIn(2000);
+    
+    $("#search #home").fadeIn(2500);
+    setTimeout(function() {
+        $("#search #bar").fadeIn(1500);
+    }, 750);
     
     setLoginText();
     setLoginScreen();
