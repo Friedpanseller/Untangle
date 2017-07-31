@@ -71,10 +71,10 @@
                     break;
                 }
             } else {
-                echo "E|Unable to find session ID " . $sessionID . "***hash " . $hash . " in database";
+                //echo "E|Unable to find session ID " . $sessionID . "***hash " . $hash . " in database";
             }
         } else {
-            echo "E|SQL Execution Error";
+            //echo "E|SQL Execution Error";
         }
     }
 ?>

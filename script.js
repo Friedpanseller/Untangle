@@ -112,6 +112,7 @@ window.onload = function() {
         }
     });
     
+    setLoginText();
     setLoginScreen();
     userReturns();
 }
@@ -141,6 +142,14 @@ function getCookie(cname) {
 
 function showLoginScreen() {
     $("#login").fadeIn(300);
+}
+
+function setLoginText() {
+    $("#login").html(
+        `<center><b><span style='font-size: 20px;'>You are now logged out</span></b></center><br /><br />
+        <button name="login" class="loginButton btnRed floatRight" onclick="setLoginText();setLoginScreen()">Log In</button>
+        `
+    );
 }
     
 function createAccountScreen() {
@@ -279,11 +288,7 @@ function logoutUser() {
         success : function (data) {
             data = data.split("|");
             if(data[0] != 'E') {
-                $("#login").html(
-                    `<center><b><span style='font-size: 20px;'>You are now logged out</span></b></center><br /><br />
-                    <button name="login" class="loginButton btnRed floatRight" onclick="setLoginScreen()">Log In</button>
-                    `
-                );
+                setLoginText();
                 showLoginScreen();
                 setUserOffline();
             } else {
