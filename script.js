@@ -27,8 +27,6 @@ window.onload = function() {
         searchBarClick();
         showDetails(instantJump);
     }
-    
-    $("#search").fadeIn(300);
 
     $("#search #bar").hover(function() {
         $("#search #bar").addClass('transition300');
@@ -56,6 +54,7 @@ window.onload = function() {
     
     $("#search #bar").click(function() {
         clicked = true;
+        $("#creator").html("");
         searchBarClick();
     }); 
     
@@ -111,6 +110,8 @@ window.onload = function() {
             container.fadeOut(300);
         }
     });
+    
+    $("#search").fadeIn(2000);
     
     setLoginText();
     setLoginScreen();
