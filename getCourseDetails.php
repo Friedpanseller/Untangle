@@ -1,11 +1,10 @@
 <?php
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "disentangle";
+    require 'sqlDetails.php';
+
+    $sql = new sqlDetails;
 
     // Create connection
-    $link = mysqli_connect($servername, $username, $password, $dbname);
+    $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
     // Check connection
     if ($link === false) {
         die("Connection failed: " . mysqli_connect_error());

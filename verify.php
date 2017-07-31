@@ -1,10 +1,10 @@
 <?php
-    $servername = "localhost";
-    $username = "friedpan_admin";
-    $password = "0*0*Leon";
-    $dbname = "friedpan_disentangle";
+    require 'sqlDetails.php';
 
-    $link = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $sql = new sqlDetails;
+
+    // Create connection
+    $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
 
     $search = $_GET["user"];
     $stmt = $link->prepare("SELECT code FROM users WHERE zID = ?;");

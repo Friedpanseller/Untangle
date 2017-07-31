@@ -1,11 +1,10 @@
 <?php
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "disentangle";
+    require 'sqlDetails.php';
+
+    $sql = new sqlDetails;
 
     // Create connection
-    $link = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
 
     $search = "%".$_POST["courseName"]."%";
     $stmt = $link->prepare("SELECT * FROM courses WHERE ID LIKE ? OR Name LIKE ? ;");

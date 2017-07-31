@@ -1,11 +1,10 @@
 <?php
-    $servername = "localhost";
-    $DBusername = "friedpan_admin";
-    $DBpassword = "0*0*Leon";
-    $dbname = "friedpan_disentangle";
+    require 'sqlDetails.php';
+
+    $sql = new sqlDetails;
 
     // Create connection
-    $link = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
+    $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
     // Check connection
     if ($link === false) {
         die("Connection failed: " . mysqli_connect_error());
@@ -21,7 +20,7 @@
 
     if($result) {*/
     $zID = $_POST["zID"];
-    $email = $zID . "@unsw.edu.au";
+    $email = $zID . "@" . $_POST["emailSuffix"];
     //$email = "friedpanseller@gmail.com";
     $password = openssl_digest("tomatoCatus" . $_POST["password"] . "tomatoCatus", 'sha512');
     $code = bin2hex(openssl_random_pseudo_bytes(25));

@@ -1,5 +1,8 @@
 
 <?php
+    require 'sqlDetails.php';
+    $sql = new sqlDetails;
+
 	ob_start();
     set_time_limit(0);
     // Sends HTML Page to user
@@ -125,11 +128,6 @@
         return substr($headers[0], 9, 3);
     }
 
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "";
-    $dbname = "disentangle";
-
     if ($_GET['action'] === "updateCourseID") {
 
         // START GETTING COURSE IDs //
@@ -226,7 +224,7 @@
         //$courseList = array_unique($courseList);
         
         // Create connection
-        $link = mysqli_connect($servername, $username, $password, $dbname);
+        $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
         // Check connection
         if ($link === false) {
             die("Connection failed: " . mysqli_connect_error());
@@ -259,7 +257,7 @@
         
         $courseList = [];
         
-        $link = mysqli_connect($servername, $username, $password, $dbname);
+        $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
         // Check connection
         if ($link === false) {
             die("Connection failed: " . mysqli_connect_error());
@@ -429,7 +427,7 @@
                             }
                         }
                         
-                        $link = mysqli_connect($servername, $username, $password, $dbname);
+                        $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
                         // Check connection
                         if ($link === false) {
                             die("Connection failed: " . mysqli_connect_error());

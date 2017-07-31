@@ -20,13 +20,14 @@ navigator.browser = (function(){
     return M.join(' ');
 })();
 
-$(document).ready(function() { 
+window.onload = function() { 
     instantJump = window.location.hash.replace("#", ""); 
     if(instantJump) {
         clicked = true;
         searchBarClick();
         showDetails(instantJump);
     }
+    
     $("#search").fadeIn(300);
 
     $("#search #bar").hover(function() {
@@ -113,7 +114,7 @@ $(document).ready(function() {
     
     setLoginScreen();
     userReturns();
-});
+}
 
 function userReturns() {
     var session = getCookie("session");
@@ -148,13 +149,19 @@ function createAccountScreen() {
          <br />
          <table>
             <tr>
-                <td>zID: </td>
+                <td>Student ID: </td>
                 <td><input id='zID' type='text' name='zID' autocomplete="off" /></td>
-                <td>@unsw.edu.au</td>
+                <td>@</td>
+                <td>
+                <select id='emailSuffix' name="cars">
+                    <option value="unsw.edu.au">unsw.edu.au</option>
+                    <option value="uni.sydney.edu.au">uni.sydney.edu.au</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td>Password: </td>
-                <td colspan='2'><input id='zPass' type='password' name='zPass' autocomplete="off" /></td>
+                <td colspan='3'><input id='zPass' type='password' name='zPass' autocomplete="off" /></td>
             </tr>
         </table>
         <br />
@@ -173,7 +180,8 @@ function sentEmailScreen() {
         async: false,
         data: {
             zID: $("#zID").val(),
-            password: $("#zPass").val()
+            password: $("#zPass").val(),
+            emailSuffix: $("#emailSuffix").val()
         },
         success : function (data) {
             if(data.split("|")[0] != 'E') {
@@ -202,7 +210,7 @@ function setLoginScreen() {
         <br />
         <table>
             <tr>
-                <td>zID: </td>
+                <td>Student ID: </td>
                 <td><input id="loginUsername" type="text" name="username" /></td>
             </tr>
             <tr>
