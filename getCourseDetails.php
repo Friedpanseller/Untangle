@@ -184,7 +184,7 @@
                             <tr><td><br /></td></tr>
                             <tr>
                                 <td>
-                                    <div class="c100 p100 green center">
+                                    <div class="c100 p100 green center" onclick="rateCourse(\'' . $row["ID"] . '\', \'Enjoyability\', \'green\')">
                                         <span>N/A%</span>
                                         <div class="slice"><div class="bar"></div><div class="fill"></div></div>
                                     </div>
@@ -195,7 +195,7 @@
                             <tr><td><br /><br /><br /></td></tr>
                             <tr>
                                 <td>
-                                    <div class="c100 p70 red center">
+                                    <div class="c100 p70 red center" onclick="rateCourse(\'' . $row["ID"] . '\', \'Difficulty\', \'red\')">
                                         <span>N/A%</span>
                                         <div class="slice"><div class="bar"></div><div class="fill"></div></div>
                                     </div>
@@ -206,7 +206,7 @@
                             <tr><td><br /><br /><br /></td></tr>
                             <tr>
                                 <td>
-                                    <div class="c100 p33 blue center">
+                                    <div class="c100 p33 blue center" onclick="rateCourse(\'' . $row["ID"] . '\', \'Skippability\', \'blue\')">
                                         <span>N/A%</span>
                                         <div class="slice"><div class="bar"></div><div class="fill"></div></div>
                                     </div>

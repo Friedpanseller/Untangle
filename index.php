@@ -3,7 +3,10 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="script.js"></script>
+        <script src="courseRatings.js"></script>
+        <script src="rangeslider.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="rangeslider.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css" />
         <link rel="stylesheet" type="text/css" href="circle.css" />
@@ -30,6 +33,8 @@
         <title>Untangle</title>
     </head>
     <body>
+        <div id="courseRatings"></div>
+        
         <div id="header" class="noselect">You are not logged in. <span class="login" onclick="showLoginScreen()">Log in</span>.</div>
         <div id="login"></div>
         <div id="search">
@@ -52,5 +57,6 @@
         <div id="creator" class="noselect" style="position: absolute; bottom: 0; left: 25vw; width: 50vw; color: rgba(255,255,255,0.3);">
             <center>The University of New South Wales | Created by Leo Liu z5080336 &Cfr; student &#8226; unsw &#8226; edu &#8226; au | Computer Science and Engineering</center>
         </div>
+        
     </body>
 </html>

@@ -53,6 +53,9 @@ window.onload = function() {
     }); 
     
     $("#search #bar").click(function() {
+        if(clicked == false) {
+            $("#search #bar").val("");
+        }
         clicked = true;
         $("#creator").html("");
         searchBarClick();
@@ -106,6 +109,14 @@ window.onload = function() {
 
         // if the target of the click isn't the container nor a descendant of the container
         if (!container.is(e.target) && container.has(e.target).length === 0) 
+        {
+            container.fadeOut(300);
+            
+        }
+        
+        container = $("#courseRatings");
+        
+        if ((!container.is(e.target) && !$("#ratingsSlider").is(e.target)) && container.has(e.target).length === 0) 
         {
             container.fadeOut(300);
         }
@@ -231,10 +242,10 @@ function setLoginScreen() {
                 <td>Password: </td>
                 <td><input id="loginPassword" type="password" name="password" /></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>Keep me logged in </td>
-                <td><input id="keepMeLoggedIn" type="checkbox" style="width: 20px" name="keepLogged" /></td>
-            </tr>
+                <td><input id="keepMeLoggedIn" type="checkbox" style="width: 20px" name="keepLogged" checked="yes" /></td>
+            </tr>-->
             <tr>
                 <td colspan="2"><span id="loginErrors"></span></td>
             </tr>
@@ -268,7 +279,7 @@ function loginUser(session) {
                     `<center><b><span style='font-size: 20px;'>Welcome Back ` + data[1] + `</span></b></center>`
                 );
                 setUserOnline(data[1]);
-                if(sessionID != "doNot") {
+                if(sessionID != "none") {
                     var expiryDate = new Date();
                     var cookieLifeDays = 14;
                     expiryDate.setTime(expiryDate.getTime() + (cookieLifeDays*24*60*60*1000));
@@ -317,7 +328,6 @@ function sendEmail() {
 }
 
 function searchBarClick() {
-    $("#search #bar").val("");
     $("#search").css("transform", "translateY(-30vh)");
     $("#search #bar").css('color', 'black');
     $("#search #bar").css('background-color', 'transparent');

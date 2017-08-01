@@ -6,8 +6,9 @@
     // Create connection
     $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
 
-    $search = "%".$_POST["courseName"]."%";
-    $stmt = $link->prepare("SELECT * FROM courses WHERE ID LIKE ? OR Name LIKE ? ;");
+    //$search = "%".$_POST["courseName"]."%";
+    $search = $_POST["courseName"];
+    $stmt = $link->prepare("SELECT * FROM courses WHERE ID REGEXP ? OR Name REGEXP ? ;");
     $stmt->bindParam(1,$search);
     $stmt->bindParam(2,$search);
                            
