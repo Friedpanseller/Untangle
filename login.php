@@ -17,6 +17,7 @@
         //echo "hpassword:" . $hPassword . "***";
         $keepMeLoggedIn = $_POST['keepMeLoggedIn'];
 
+        // DO NOT INCLUDE '|' or '$' IN SESSION ID
         $sessionID = bin2hex(openssl_random_pseudo_bytes(20));
         $hash = openssl_digest("ASaltyBlueberryBagel" . $userBrowser . $sessionID . $userIP . "ASaltyBlueberryBagel", 'sha512');
 
@@ -36,7 +37,11 @@
                             $stmt->bindParam(1,$hash);
                             $stmt->bindParam(2,$username);
                             if($stmt->execute()) {
-                                echo "S|" . $username . "|" . $sessionID;
+                                if($keepMeLoggedIn == "YES") {
+                                    echo "S|" . $username . "|YES$" . $sessionID;
+                                } else {
+                                    echo "S|" . $username . "|NO$" . $sessionID;
+                                }
                             } else {
                                 echo "E|SQL UPDATE Statement did not execute";
                             }
@@ -67,7 +72,7 @@
             $rows = $stmt->fetchAll();
             if($rows) {
                 foreach($rows as $row) {
-                    echo "S|" . $row["zID"] . "|" . $sessionID;
+                    echo "S|" . $row["zID"] . "|KEEP$" . $sessionID;
                     break;
                 }
             } else {

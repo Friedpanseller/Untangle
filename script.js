@@ -242,10 +242,10 @@ function setLoginScreen() {
                 <td>Password: </td>
                 <td><input id="loginPassword" type="password" name="password" /></td>
             </tr>
-            <!--<tr>
+            <tr>
                 <td>Keep me logged in </td>
-                <td><input id="keepMeLoggedIn" type="checkbox" style="width: 20px" name="keepLogged" checked="yes" /></td>
-            </tr>-->
+                <td><input id="keepMeLoggedIn" type="checkbox" style="width: 20px" name="keepLogged" checked="YES" /></td>
+            </tr>
             <tr>
                 <td colspan="2"><span id="loginErrors"></span></td>
             </tr>
@@ -279,11 +279,24 @@ function loginUser(session) {
                     `<center><b><span style='font-size: 20px;'>Welcome Back ` + data[1] + `</span></b></center>`
                 );
                 setUserOnline(data[1]);
-                if(sessionID != "none") {
-                    var expiryDate = new Date();
-                    var cookieLifeDays = 14;
-                    expiryDate.setTime(expiryDate.getTime() + (cookieLifeDays*24*60*60*1000));
-                    document.cookie = "session=" + sessionID + ";expires=" + expiryDate.toUTCString();
+                if(sessionID != "none" && sessionID) {
+                    sessionID = sessionID.split("$");
+                    var keepLogged = sessionID[0];
+                    var sessionID = sessionID[1];
+                    if(keepLogged == "YES") {
+                        var expiryDate = new Date();
+                        var cookieLifeDays = 365;
+                        expiryDate.setTime(expiryDate.getTime() + (cookieLifeDays*24*60*60*1000));
+                        document.cookie = "session=" + sessionID + ";expires=" + expiryDate.toUTCString();
+                    } else if (keepLogged == "NO") {
+                        document.cookie = "session=" + sessionID;
+                    } else if (keepLogged == "KEEP") {
+                        // DO NOTHING
+                    } else {
+                        alert("ERROR//Cannot identify keep me logged in value, please contact admin.")
+                    }
+                } else {
+                    alert("ERROR//Log in did not work, please contact admin");
                 }
             } else {
                 //alert(4);
