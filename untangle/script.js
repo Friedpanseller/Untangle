@@ -131,6 +131,14 @@ window.onload = function() {
     setLoginText();
     setLoginScreen();
     userReturns();
+    
+    $.ajax({
+        url : "../../test.php",
+        type: "POST",
+        success : function (data) {
+            alert(data);
+        }
+    });
 }
 
 function userReturns() {
