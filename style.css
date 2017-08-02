@@ -78,6 +78,7 @@ a:active {
     top: 30px;
     right: 0;
     display: none;
+    z-index: 1000;
 }
 
 #login table tr td {
