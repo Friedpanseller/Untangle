@@ -45,7 +45,7 @@
                 <br />
                 <hr id="homeUnderline" />
             </center>
-                <input type="text" id="bar" value="🔎&#xFE0E; search courses" />
+                <input type="text" id="bar" value="🔎&#xFE0E; search courses" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
         </div>
         <div id="content">
             <div id="buffer"></div>
