@@ -1,4 +1,5 @@
 <?php
+    // Stores the SQL Login Details
     require 'sqlDetails.php';
 
     $sql = new sqlDetails;
@@ -9,11 +10,18 @@
     if ($link === false) {
         die("Connection failed: " . mysqli_connect_error());
     } 
-
+    
+    // Query
     $sql = "SELECT * FROM courses WHERE ID = '" . $_POST["courseName"] . "'";
+
+    // Execute Query 
     if($result = mysqli_query($link, $sql)) {
+        // If there are results
         if (mysqli_num_rows($result) > 0) {
+            // Fetch results into an array
             $row = mysqli_fetch_array($result);
+            
+            // Calculate capacity by highest percentage of lecture or tutorial capacity
             $enrollment = max($row["lectureEnrol"], $row["tuteEnrol"]);
             if($enrollment == $row["lectureEnrol"]) {
                 $capacity = $row["lectureCapacity"];
@@ -25,6 +33,8 @@
             } else {
                 $enrollmentPercent = ceil($enrollment / $capacity * 100);
             }
+            
+            // Echo webpage to user
             echo    
                    '<span class="h2" id="ID">' . $row["ID"] . '</span>
                     <span class="h3" id="Name">' . $row["Name"] . '</span>

@@ -276,7 +276,7 @@ function loginUser(session) {
                 var username = data[1];
                 var sessionID = data[2];
                 $("#login").html(
-                    `<center><b><span style='font-size: 20px;'>Welcome Back ` + data[1] + `</span></b></center>`
+                    `<center><b><span style='font-size: 20px;'>Welcome Back ` + username + `</span></b></center>`
                 );
                 setUserOnline(data[1]);
                 if(sessionID != "none") {

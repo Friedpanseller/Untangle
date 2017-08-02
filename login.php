@@ -7,7 +7,7 @@
     $userBrowser = $_POST['userBrowser'];
 
     $sessionID = $_POST['sessionID'];
-    if($sessionID == "") {
+    if($sessionID == "" || !sessionID) {
 
         $username = $_POST['username'];
         //echo "E|" . $username . "***";

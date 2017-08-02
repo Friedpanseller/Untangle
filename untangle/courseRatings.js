@@ -15,7 +15,7 @@ function rateCourse(ID, field, color) {
         <center>
             <br />
             <br />
-            <span style="font-size: 30px;" class="noselect">Submit a Review for ` + ID + `</span>
+            <span style="font-size: 30px;" class="noselect">Submit a Rating for ` + ID + `</span>
             <br />
             <span style="font-size: 20px;" class="noselect">` + field + `</span>
             <br />
@@ -24,6 +24,16 @@ function rateCourse(ID, field, color) {
             <br />
             <input id="ratingsSlider" type="range">
         </center>
+        <button 
+            id="submitReview" 
+            onclick="submitRating('` + ID + `', ` + $("#ratingsSlider").val() + `)" 
+            class="loginButton" 
+            style="position: absolute; bottom: 30px; right: 30px;"
+            onmouseover="$(this).css('border', '2px solid ` + color + `'); $(this).css('color', '` + color + `';)" 
+            onmouseout="$(this).css('border', '2px solid black'); $(this).css('color', 'black';)"
+        >
+            Submit Review
+        </button>
     `);
     
     //From https://codepen.io/andreruffert/pen/mJgvmq

@@ -306,11 +306,10 @@ a:active {
 
 .rangeslider, #ratingsSlider {
     max-width: 25vw;
-    background-color: red;
 }
 
-.ratingsSlider__fill {
-    background-color: darkred;
+.rangeslider__fill {
+    background: #8000FF;
 }
 
 .rangeslider__handle {

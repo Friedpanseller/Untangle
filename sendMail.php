@@ -4,11 +4,13 @@
     $sql = new sqlDetails;
 
     // Create connection
-    $link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
+    //$link = mysqli_connect($sql->server, $sql->username, $sql->password, $sql->database);
+    // Create connection
+    $link = new PDO("mysql:host=$sql->server;dbname=$sql->database", $sql->username, $sql->password);
     // Check connection
-    if ($link === false) {
-        die("Connection failed: " . mysqli_connect_error());
-    } 
+    //if ($link === false) {
+    //   die("Connection failed: " . mysqli_connect_error());
+    //} 
     
     /*$query = "SELECT IF( EXISTS(
              SELECT *
@@ -25,11 +27,17 @@
     $password = openssl_digest("tomatoCatus" . $_POST["password"] . "tomatoCatus", 'sha512');
     $code = bin2hex(openssl_random_pseudo_bytes(25));
 
-    $query = "
+    $stmt = $link->prepare("
         INSERT INTO `users` 
         (`zID`, `email`, `password`, `code`) VALUES
         ('" . $zID . "', '" . $email . "', '" . $password . "', '" . $code . "');
-    ";
+    ");
+
+    /*$query = "
+        INSERT INTO `users` 
+        (`zID`, `email`, `password`, `code`) VALUES
+        ('" . $zID . "', '" . $email . "', '" . $password . "', '" . $code . "');
+    ";*/
 
     //echo "E|Query is " . $query . "<br />, password is " . $_POST["password"] . "***";
 
