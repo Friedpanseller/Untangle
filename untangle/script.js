@@ -200,7 +200,7 @@ function createAccountScreen() {
 function sentEmailScreen() {
     $("#errorsDiv").text("Creating account...");
     $.ajax({
-        url : "sendMail.php",
+        url : "../sendMail.php",
         type: "POST",
         async: false,
         data: {
@@ -259,7 +259,7 @@ function setLoginScreen() {
 function loginUser(session) {
     //alert("attempting login");
     $.ajax({
-        url : "login.php",
+        url : "../login.php",
         type: "POST",
         data: {
             username: $("#loginUsername").val(),
@@ -295,7 +295,7 @@ function loginUser(session) {
 
 function logoutUser() {
     $.ajax({
-        url : "logout.php",
+        url : "../logout.php",
         type: "POST",
         data: {
             userBrowser: navigator.browser,
@@ -347,7 +347,7 @@ function hideDetails() {
 function showDetails(courseID) { 
     clickedItem = true;
     $.ajax({
-        url: 'getCourseDetails.php',
+        url: '../getCourseDetails.php',
         type: 'POST',
         data: {
             courseName: courseID
