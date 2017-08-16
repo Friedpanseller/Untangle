@@ -33,8 +33,9 @@
         <title>Untangle</title>
     </head>
     <body>
+        <div id="backgroundImage"><img /></div>
         <div id="courseRatings"></div>
-        
+
         <div id="header" class="noselect">You are not logged in. <span class="login" onclick="showLoginScreen()">Log in</span>.</div>
         <div id="login"></div>
         <div id="search">
@@ -57,6 +58,17 @@
         <div id="creator" class="noselect" style="position: absolute; bottom: 0; left: 25vw; width: 50vw; color: rgba(255,255,255,0.3);">
             <center>The University of New South Wales | Created by Leo Liu z5080336 &Cfr; student &#8226; unsw &#8226; edu &#8226; au | Computer Science and Engineering</center>
         </div>
-        
     </body>
 </html>
+
+<?php
+    include "readFromUntil.php";
+    $html = file_get_contents("https://www.nationalgeographic.com/photography/photo-of-the-day");
+    $html = readFromUntil($html, "'aemLeadImage': '", "/'");
+    echo "
+        <script>
+                $('#backgroundImage img').attr('src', '" . $html . "');
+                //$('#backgroundImage').css(`background-size`, `cover`);
+                //$('#backgroundImage').css('-webkit-filter', 'blur(5px)');
+        </script>";
+?>

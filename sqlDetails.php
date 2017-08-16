@@ -1,10 +1,10 @@
 <?php
 
 class sqlDetails {
-	public $server = "localhost";
-	public $username = "friedpan_admin";
-	public $password = "0*0*Leon";
-	public $database = "friedpan_disentangle";
+	public $server = "127.0.0.1";
+	public $username = "root";
+	public $password = "";
+	public $database = "disentangle";
 }
 
 ?>

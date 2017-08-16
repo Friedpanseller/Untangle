@@ -16,24 +16,24 @@
         $rows = $stmt->fetchAll();
         if($rows) {
             echo   "<table cellspacing='0' cellpadding='0'>
-                <tr>
-                    <td style='text-align: center' width='20%'>
-                        <b><br />Course ID<br /><br />
-                    </td>
-                    <td width='45%'>
-                        <b><br />Course Name<br /><br />
-                    </td>
-                    <td width='10%' style='text-align: center'>
-                        <b><br />Enjoyability<br /><br />
-                    </td>   
-                    <td width='10%' style='text-align: center'>
-                        <b><br />Difficulty<br /><br />
-                    </td>
-                    <td width='10%' style='text-align: center'>
-                        <b><br />Skippability<br /><br />
-                    </td>
-                    <td width='5%'><td>
-                </tr>";
+                        <tr>
+                            <td style='text-align: center' width='20%'>
+                                <b><br />Course ID<br /><br />
+                            </td>
+                            <td width='45%'>
+                                <b><br />Course Name<br /><br />
+                            </td>
+                            <td width='10%' style='text-align: center'>
+                                <b><br />Enjoyability<br /><br />
+                            </td>   
+                            <td width='10%' style='text-align: center'>
+                                <b><br />Difficulty<br /><br />
+                            </td>
+                            <td width='10%' style='text-align: center'>
+                                <b><br />Skippability<br /><br />
+                            </td>
+                            <td width='5%'><td>
+                        </tr>";
             foreach($rows as $row) {
                 echo   "<tr class='results' onclick='showDetails(\"" . $row["ID"] . "\")'>
                             <td style='text-align: center' width='20%'>" . $row["ID"] . "</td>

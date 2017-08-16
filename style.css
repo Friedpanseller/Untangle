@@ -3,9 +3,29 @@ body {
     border: 0;
     padding: 0;
     font-family: 'Helvetica';
-    background: #cfdde8 url(images/background.jpeg)  no-repeat center top fixed;
+    /*background: #cfdde8 url(images/background.jpeg)  no-repeat center top fixed;*/
     color: white;
-    overflow-x : hidden;
+    overflow-x: hidden;
+}
+
+#backgroundImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#backgroundImage img {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    margin: -50px -50px -50px -50px;
+    width: calc(100vw + 100px);
 }
 
 .h2 {
@@ -122,6 +142,12 @@ a:active {
     color: crimson;
 }
 
+.btnBlack:hover {
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+}
+
 #loginErrors {
     color: red;
 }
@@ -187,10 +213,10 @@ a:active {
     min-height: 80vh;
     margin-top: calc(-30vh - 100px);
     margin-left: 10vw;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     border-radius: 15px;
     display: none;
-    color: black;
+    color: black
 }
 
 #content #buffer {
@@ -293,39 +319,61 @@ a:active {
 
 #courseRatings {
     position: fixed;
-    width: 30vw;
+    width: 40vw;
     height: 30vh;
     top: 35vh;
-    left: 35vw;
+    left: 30vw;
+    margin: 0 auto;
     background-color: white;
     -webkit-box-shadow: 0px 0px 3000px 2000px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 3000px 2000px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 3000px 2000px rgba(0,0,0,0.75);
     display: none;
     z-index: 5000;
+    border-radius: 100px;
 }
 
 .rangeslider, #ratingsSlider {
-    max-width: 25vw;
-    background-color: red;
+    border-radius: 5px;
+    height: 5px;
+    border: 0;
+    max-width: 35vw;
+    background: azure;
 }
 
-.ratingsSlider__fill {
-    background-color: darkred;
+.rangeslider__fill {
+    border-radius: 5px;
+    border: 0;
+    /*background-color: #baf4ff*/;
+    background: -moz-linear-gradient(0deg, rgba(175,3,255,1) 0%, rgba(255,141,3,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(175,3,255,1)), color-stop(100%, rgba(255,141,3,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(0deg, rgba(175,3,255,1) 0%, rgba(255,141,3,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(0deg, rgba(175,3,255,1) 0%, rgba(255,141,3,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(0deg, rgba(175,3,255,1) 0%, rgba(255,141,3,1) 100%); /* ie10+ */
+    background: linear-gradient(90deg, rgba(175,3,255,1) 0%, rgba(255,141,3,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#AF03FF', endColorstr='#FF8D03',GradientType=1 ); /* ie6-9 */
 }
 
 .rangeslider__handle {
-    border-radius: 0px;
-    min-width: 62px;
-    line-height: 42px;
+    border-radius: 20px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
     text-align: center;
-    background-color: white;
+    margin-top: -2px;
+    background-color: rgba(255,141,3,1);
     color: black;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 18px;
+    -moz-box-shadow: 0;
+    -webkit-box-shadow: 0;
+    box-shadow: 0;
   
     &:after {
         border-radius: 0;
+        -moz-box-shadow: 0;
+        -webkit-box-shadow: 0;
+        box-shadow: 0;
         background-color: white;
     }
 }
